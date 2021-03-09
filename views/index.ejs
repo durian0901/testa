@@ -3,11 +3,23 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <input type='submit' value='Add' onclick="javascript: location.href='add'">
+  
   </head>
   <body>
     <h1>Account -List</h1>
   <table>
+    <input type='submit' value='Add' onclick="javascript: location.href='add'">
+    <div class="search">
+      <label>UserId：</label>
+      <input type="text" name="suserid" value="" placeholder="input the userid">
+      <input type="button" name="sSearch" value="Search" onclick="Search();">
+      <script>
+        function Search() {
+          var userid = document.getElementsByName('suserid')[0].value;
+          window.location.href = "/?user=" + userid;;
+          }
+      </script>
+  </div>
     <tr>
       <th>id</th>
       <th>userid</th>
@@ -30,6 +42,17 @@
         </td>
         <td>
           <input type="button" name="edit" value="Edit" onclick="Edit('<%= data[i].id %>');">
+        </td>
+        <td>
+          <input type="button" name="delete" value="Delete" onclick="Delete('<%= data[i].id  %>');" />
+          <script>
+            function Delete(id) {
+              var rs = confirm('Confirm to delete?');
+              if (rs) {
+              window.location.href = "/userDelete?id=" + id;
+              }
+            }
+          </script>
         </td>
       </tr>
       <% } %>
